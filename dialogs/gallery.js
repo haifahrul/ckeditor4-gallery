@@ -775,8 +775,8 @@ CKEDITOR.dialog.add('galleryDialog', function (editor) {
     }
 
     function createScriptViewerRun(dialog, iSelectedIndex, width, height) {
-        var galleryid = dialog.params.getVal('galleryid'),
-            strVar = '(function($) {';
+        // var galleryid = dialog.params.getVal('galleryid'),
+        var strVar = '(function($) {';
         strVar += "$(function() {";
         strVar += createScriptViewerInit(dialog);
         strVar += "});";
@@ -786,14 +786,14 @@ CKEDITOR.dialog.add('galleryDialog', function (editor) {
     }
 
     function createScriptViewerInit(dialog) {
-        const viewerOptions = "{ inline: false," +
-            // "button: " + dialog.params.getVal('viewerButton') + "," +
-            // "interval: " + dialog.params.getVal('viewerInterval') + "," +
-            // "ready() { galleries.full() }" +
+        const viewerOptions = "{ inline: false" +
+            ",button: " + dialog.params.getVal('viewerButton') +
+            ",interval: " + dialog.params.getVal('viewerInterval') +
+            // ",ready() { galleries.full() }" +
             "}";
 
         var galleryid = dialog.params.getVal('galleryid');
-        return "var galleries = new Viewer(document.getElementById('" + galleryid + "_images'), " + viewerOptions + ");";
+        return "const galleries = new Viewer(document.getElementById('" + galleryid + "_images'), " + viewerOptions + ");";
     }
 
     function createDOMViewerRun(dialog) {
@@ -874,6 +874,15 @@ CKEDITOR.dialog.add('galleryDialog', function (editor) {
             }
         });
         galleryDOM.append(scriptViewerJs);
+
+        // Dynamically add CSS for "viwer init"
+        var scriptViewerInit = CKEDITOR.document.createElement('script', {
+            attributes: {
+                type: 'text/javascript'
+            }
+        });
+        scriptViewerInit.setText(`(function($) { ${createScriptViewerInit(dialog)} })(jQuery);`);
+        galleryDOM.append(scriptViewerInit);
 
         // Dynamically add CSS for "viewerjs"
         // Be sure the path is correct and file is available !!
@@ -1193,7 +1202,7 @@ CKEDITOR.dialog.add('galleryDialog', function (editor) {
 
                 // Invoke the setup methods of all dialog elements, to set dialog elements values with DOM input data.
                 this.setupContent(this, true);
-                //updateFramePreview(this);
+                updateFramePreview(this);
                 this.newGalleryMode = false;
             }
             this.openCloseStep = false;
