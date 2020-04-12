@@ -370,17 +370,18 @@ CKEDITOR.dialog.add('galleryDialog', function (editor) {
         removePlaceHolderImg(dialog);
         var preview = dialog.previewImage;
         var url = preview.$.src;
-        var ratio = preview.$.width / preview.$.height;
-        var w = 50;
-        var h = 50;
-        if (ratio > 1) {
-            h = h / ratio;
-        } else {
-            w = w * ratio;
-        }
+        // var ratio = preview.$.width / preview.$.height;
+        // var w = 50;
+        // var h = 50;
+        // if (ratio > 1) {
+        //     h = h / ratio;
+        // } else {
+        //     w = w * ratio;
+        // }
         var oOption;
         var combo = dialog.getContentElement('gallery-content-id', 'img-items-id');
-        var ind = dialog.imagesList.pushUnique([url, '', '', w.toFixed(0), h.toFixed(0)]);
+        // var ind = dialog.imagesList.pushUnique([url, '', '', w.toFixed(0), h.toFixed(0)]);
+        var ind = dialog.imagesList.pushUnique([url]); // REVIEW:
         if (ind >= 0) {
             oOption = addOption(combo, 'IMG_' + ind + ' : ' + url.substring(url.lastIndexOf('/') + 1), url, dialog.getParentEditor().document);
             // select index 0
@@ -785,10 +786,10 @@ CKEDITOR.dialog.add('galleryDialog', function (editor) {
     }
 
     function createScriptViewerInit(dialog) {
-        const viewerOptions = "{ inline: true," +
-            "button: " + dialog.params.getVal('viewerButton') + "," +
-            "interval: " + dialog.params.getVal('viewerInterval') + "," +
-            "ready() { galleries.full() }" +
+        const viewerOptions = "{ inline: false," +
+            // "button: " + dialog.params.getVal('viewerButton') + "," +
+            // "interval: " + dialog.params.getVal('viewerInterval') + "," +
+            // "ready() { galleries.full() }" +
             "}";
 
         var galleryid = dialog.params.getVal('galleryid');
@@ -814,7 +815,7 @@ CKEDITOR.dialog.add('galleryDialog', function (editor) {
         var ulObj = galleryDOM.append('ul');
         ulObj.setAttribute('id', id + '_images');
         ulObj.setAttribute('class', 'docs-pictures clearfix');
-        ulObj.setAttribute('style', 'display:none');
+        // ulObj.setAttribute('style', 'display:none');
 
         feedUlWithImages(dialog, ulObj);
         return galleryDOM;
@@ -831,8 +832,10 @@ CKEDITOR.dialog.add('galleryDialog', function (editor) {
             newImgDOM.setAttribute('title', dialog.imagesList[i][IMG_PARAM.TITLE]);
             newImgDOM.setAttribute('alt', dialog.imagesList[i][IMG_PARAM.ALT]);
             newImgDOM.setAttribute('contenteditable', 'false');
-            newImgDOM.setAttribute('width', dialog.imagesList[i][IMG_PARAM.WIDTH]);
-            newImgDOM.setAttribute('height', dialog.imagesList[i][IMG_PARAM.HEIGHT]);
+
+            // REVIEW:
+            // newImgDOM.setAttribute('width', dialog.imagesList[i][IMG_PARAM.WIDTH]);
+            // newImgDOM.setAttribute('height', dialog.imagesList[i][IMG_PARAM.HEIGHT]);
         }
     }
 
@@ -891,7 +894,7 @@ CKEDITOR.dialog.add('galleryDialog', function (editor) {
         });
         scriptGalleryCss.setText("(function($) { $('head').append('<link rel=\"stylesheet\" href=\"" + GALLERY_CSS + "\" type=\"text/css\" />'); })(jQuery);");
         galleryDOM.append(scriptGalleryCss);
-        
+
         if (dialog.imagesList.length) {
             extraStyles.backgroundImage = 'url("' + dialog.imagesList[0][IMG_PARAM.URL] + '")';
         }
@@ -950,17 +953,18 @@ CKEDITOR.dialog.add('galleryDialog', function (editor) {
                 align: 'center',
                 // The tab contents.
                 elements: [
-                    { // For Text on image
-                        type: 'text',
-                        id: 'id',
-                        style: 'display:none;',
-                        onLoad: function () {
-                            this.getInputElement().setAttribute('readOnly', true);
-                        }
-                    },
+                    // { // For Text on image
+                    //     type: 'text',
+                    //     id: 'id',
+                    //     label: lang.imgTitle,
+                    //     style: 'display:none;',
+                    //     onLoad: function () {
+                    //         this.getInputElement().setAttribute('readOnly', true);
+                    //     }
+                    // },
                     { // Short description
                         type: 'text',
-                        id: 'txturlid',
+                        id: 'txt-url-id',
                         style: 'display:none;',
                         label: lang.imgList,
                         onChange: function () {
@@ -983,7 +987,7 @@ CKEDITOR.dialog.add('galleryDialog', function (editor) {
                         filebrowser:
                         {
                             action: 'Browse',
-                            target: 'gallery-content-id:txturlid',
+                            target: 'gallery-content-id:txt-url-id',
                             url: editor.config.filebrowserImageBrowseUrl || editor.config.filebrowserBrowseUrl
                         },
                         label: lang.imgAdd
