@@ -1003,15 +1003,16 @@ CKEDITOR.dialog.add('galleryDialog', function (editor) {
                                 type: 'hbox',
                                 align: 'center',
                                 height: 150,
-                                widths: '100%',
+                                widths: ['85%', '15%'],
                                 children: [
                                     {
                                         type: 'select',
                                         id: 'img-items-id',
                                         label: lang.picturesList,
                                         multiple: false,
-                                        style: 'height:125px;',
                                         items: [],
+                                        width: '100%',
+                                        style: 'height:125px;',
                                         // onChange: function (api) {
                                         //     //unselectIfNotUnique(this);
                                         //     selectFirstIfNotUnique(this);
@@ -1063,7 +1064,7 @@ CKEDITOR.dialog.add('galleryDialog', function (editor) {
                                                 ]
                                             }
                                         ]
-                                    }
+                                    },
                                 ]
                             },
                             {
