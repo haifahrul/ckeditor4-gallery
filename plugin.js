@@ -137,8 +137,8 @@
             }
 
             // Register our dialog file. this.path is the plugin folder path.
-            CKEDITOR.dialog.add('galleryDialog', this.path + 'dialogs/gallery.js');
-            // CKEDITOR.dialog.add('galleryDialog', this.path + 'dialogs/gallery.min.js');
+            // CKEDITOR.dialog.add('galleryDialog', this.path + 'dialogs/gallery.js');
+            CKEDITOR.dialog.add('galleryDialog', this.path + 'dialogs/gallery.min.js');
 
             // v3
             if (editor.addCss)

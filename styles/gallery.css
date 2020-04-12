@@ -1,10 +1,10 @@
-.docs-pictures {
+.ckeditor-gallery-images {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.docs-pictures > li {
+.ckeditor-gallery-images > li {
     border: 1px solid transparent;
     float: left;
     height: calc(100% / 2);
@@ -13,7 +13,7 @@
     width: calc(100% / 5);
 }
 
-.docs-pictures > li > img {
+.ckeditor-gallery-images > li > img {
     cursor: -webkit-zoom-in;
     cursor: zoom-in;
     width: 100%;

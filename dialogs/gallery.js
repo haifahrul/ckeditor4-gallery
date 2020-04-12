@@ -24,7 +24,7 @@ var IMG_PARAM = { URL: 0, TITLE: 1, ALT: 2, WIDTH: 3, HEIGHT: 4 },
     JQUERY_SCRIPT = pluginPath + "vendor/jquery.min.js",
     VIEWER_JS = pluginPath + 'vendor/viewer/viewer.min.js',
     VIEWER_CSS = pluginPath + "vendor/viewer/viewer.min.css",
-    GALLERY_CSS = pluginPath + "styles/gallery.css";
+    GALLERY_CSS = pluginPath + "styles/gallery.min.css";
 
 function var_dump(_var, _level) {
     "use strict";
@@ -814,7 +814,7 @@ CKEDITOR.dialog.add('galleryDialog', function (editor) {
 
         var ulObj = galleryDOM.append('ul');
         ulObj.setAttribute('id', id + '_images');
-        ulObj.setAttribute('class', 'docs-pictures clearfix');
+        ulObj.setAttribute('class', 'ckeditor-gallery-images clearfix');
         // ulObj.setAttribute('style', 'display:none');
 
         feedUlWithImages(dialog, ulObj);
