@@ -1,6 +1,9 @@
 # Ckeditor4 Plugins - Gallery
 Gallery Plugin for [CKEditor][1] with [Viewerjs][2]
 
+<img src="https://github.com/haifahrul/ckeditor4-gallery/blob/master/images/example.gif?raw=true" style="height: 200px; width: auto;"/>
+
+
 ## Feature
 A cool plugin which allow to create and manage Gallery in CKEditor.
 You can easily Add, Remove images to create the Images Gallery.
