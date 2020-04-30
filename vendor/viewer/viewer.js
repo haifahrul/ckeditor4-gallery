@@ -2650,7 +2650,8 @@
     open: function open() {
       var body = this.body;
       addClass(body, CLASS_OPEN);
-      body.style.paddingRight = "".concat(this.scrollbarWidth + (parseFloat(this.initialBodyPaddingRight) || 0), "px");
+      // body.style.paddingRight = "".concat(this.scrollbarWidth + (parseFloat(this.initialBodyPaddingRight) || 0), "px");
+      body.style.paddingRight = "100%"; // TODO: Under review
     },
     close: function close() {
       var body = this.body;
